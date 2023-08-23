@@ -10,7 +10,15 @@ class TextBoxPageLocators:
     SUBMIT = (By.ID, "submit")
 
     # created from
-    CREATED_FULL_NAME = (By.CSS_SELECTOR, '#output #name')
-    CREATED_EMAIL = (By.CSS_SELECTOR, '#output #email')
-    CREATED_CURRENT_ADDRESS = (By.CSS_SELECTOR, '#output #currentAddress')
-    CREATED_PERMANENT_ADDRESS = (By.CSS_SELECTOR, '#output #permanentAddress')
+    CREATED_FULL_NAME = (By.CSS_SELECTOR, "#output #name")
+    CREATED_EMAIL = (By.CSS_SELECTOR, "#output #email")
+    CREATED_CURRENT_ADDRESS = (By.CSS_SELECTOR, "#output #currentAddress")
+    CREATED_PERMANENT_ADDRESS = (By.CSS_SELECTOR, "#output #permanentAddress")
+
+
+class CheckBoxPageLocators:
+    EXPAND_ALL_BUTTON = (By.CSS_SELECTOR, "button[title='Expand all']")
+    ITEM_LIST = (By.CLASS_NAME, "rct-title")
+    CHECKED_ITEMS = (By.CLASS_NAME, "rct-icon-check")
+    TITLE_ITEM = ".//ancestor::span[@class='rct-text']"
+    OUTPUT_RESULT = (By.CLASS_NAME, "text-success")
