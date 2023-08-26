@@ -1,3 +1,4 @@
+from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -7,7 +8,8 @@ class BasePage:
         self.driver = driver
         self.url = url
 
-    def open(self):
+    def open(self, driver):
+        self.driver = driver
         self.driver.get(self.url)
 
     def element_is_visible(self, locator, timeout=5):
@@ -45,3 +47,12 @@ class BasePage:
             "document.getElementsByTagName('footer')[0].remove();"
         )
 
+    def action_double_click(self, element):
+        action = ActionChains(self.driver)
+        action.double_click(element)
+        action.perform()
+
+    def action_right_click(self, element):
+        action = ActionChains(self.driver)
+        action.context_click(element)
+        action.perform()

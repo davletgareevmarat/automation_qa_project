@@ -1,5 +1,7 @@
 import random
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.select import Select
+
 from data.generator.generator import generated_person
 
 from locators.elements_page_locators import (
@@ -7,6 +9,7 @@ from locators.elements_page_locators import (
     CheckBoxPageLocators,
     RadioButtonPageLocators,
     WebTablePageLocators,
+    ButtonsPageLocators,
 )
 from pages.base_page import BasePage
 
@@ -132,7 +135,7 @@ class WebTablePage(BasePage):
 
     def check_search_person(self):
         delete_button = self.element_is_present(self.locators.DELETE_BUTTON)
-        row = delete_button.find_element('xpath', self.locators.ROW_PARENT)
+        row = delete_button.find_element("xpath", self.locators.ROW_PARENT)
         return row.text.splitlines()
 
     def update_person_info(self):
@@ -150,6 +153,11 @@ class WebTablePage(BasePage):
     def check_deleted(self):
         return self.element_is_present(self.locators.NO_ROWS_FOUND).text
 
+    def select_row(self):
+        count_row_button = self.element_is_present(self.locators.COUNT_ROW_LIST)
+        select = Select(count_row_button)
+        select.select_by_index(2)
+
     def select_up_to_some_rows(self):
         count = [5, 10, 20, 25, 50, 100]
         data = []
@@ -164,3 +172,40 @@ class WebTablePage(BasePage):
     def check_count_rows(self):
         list_rows = self.elements_are_present(self.locators.FULL_PEOPLE_LIST)
         return len(list_rows)
+
+
+class ButtonsPage(BasePage):
+    locators = ButtonsPageLocators()
+
+
+    def click_on_different_button(self, type_click):
+        if type_click == "double":
+            self.action_double_click(
+                self.element_is_visible(self.locators.DOUBLE_BUTTON)
+            )
+            return self.check_clicked_on_the_button(self.locators.SUCCESS_DOUBLE)
+        if type_click == "right":
+            self.action_right_click(
+                self.element_is_visible(self.locators.RIGHT_CLICK_BUTTON)
+            )
+            return self.check_clicked_on_the_button(self.locators.SUCCESS_RIGHT)
+        if type_click == "click":
+            self.element_is_visible(self.locators.CLICK_ME_BUTTON).click()
+            return self.check_clicked_on_the_button(self.locators.SUCCESS_CLICK_ME)
+
+    def click_on_button(self):
+        self.element_is_visible(self.locators.CLICK_ME_BUTTON).click()
+        return self.check_clicked_on_the_button(self.locators.SUCCESS_CLICK_ME)
+
+    def double_click_on_button(self):
+        self.action_double_click(self.element_is_visible(self.locators.DOUBLE_BUTTON))
+        return self.check_clicked_on_the_button(self.locators.SUCCESS_DOUBLE)
+
+    def right_click_on_button(self):
+        self.action_right_click(
+            self.element_is_visible(self.locators.RIGHT_CLICK_BUTTON)
+        )
+        return self.check_clicked_on_the_button(self.locators.SUCCESS_RIGHT)
+
+    def check_clicked_on_the_button(self, element):
+        return self.element_is_present(element).text
