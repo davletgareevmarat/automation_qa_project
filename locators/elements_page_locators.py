@@ -74,3 +74,10 @@ class ButtonsPageLocators:
 class LinksPageLocators:
     SIMPLE_LINK = (By.CSS_SELECTOR, "#simpleLink")
     BAD_REQUEST = (By.CSS_SELECTOR, "#bad-request")
+
+
+class UploadAndDownloadPageLocators:
+    UPLOAD_FILE = (By.CSS_SELECTOR, "#uploadFile")
+    UPLOADED_RESULT = (By.CSS_SELECTOR, "#uploadedFilePath")
+
+    DOWNLOAD_FILE = (By.CSS_SELECTOR, "#downloadButton")

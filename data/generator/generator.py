@@ -7,6 +7,14 @@ from data.data import Person
 faker_ru = Faker("ru_Ru")
 Faker.seed()
 
+def generated_file():
+    path = rf"C:\Users\davle\PycharmProjects\PyhonAutimationCraft{random.randint(0, 777)}.txt"
+    with open(path, "w+") as my_file:
+        my_file.write(f"Hello world{random.randint(0, 777)}")
+
+    return my_file.name, path
+
+
 
 def generated_person():
     yield Person(
