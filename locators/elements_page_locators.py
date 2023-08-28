@@ -61,11 +61,16 @@ class WebTablePageLocators:
 
 
 class ButtonsPageLocators:
-    DOUBLE_BUTTON = (By.CSS_SELECTOR, "button[id='doubleClickBtn']")
-    RIGHT_CLICK_BUTTON = (By.CSS_SELECTOR, "button[id='rightClickBtn']")
+    DOUBLE_BUTTON = (By.CSS_SELECTOR, "#doubleClickBtn")
+    RIGHT_CLICK_BUTTON = (By.CSS_SELECTOR, "#rightClickBtn")
     CLICK_ME_BUTTON = (By.XPATH, "//div[3]/button")
 
     # result
-    SUCCESS_DOUBLE = (By.CSS_SELECTOR, 'p[id="doubleClickMessage"]')
-    SUCCESS_RIGHT = (By.CSS_SELECTOR, 'p[id="rightClickMessage"]')
-    SUCCESS_CLICK_ME = (By.CSS_SELECTOR, 'p[id="dynamicClickMessage"]')
+    SUCCESS_DOUBLE = (By.CSS_SELECTOR, "#doubleClickMessage")
+    SUCCESS_RIGHT = (By.CSS_SELECTOR, "#rightClickMessage")
+    SUCCESS_CLICK_ME = (By.CSS_SELECTOR, "#dynamicClickMessage")
+
+
+class LinksPageLocators:
+    SIMPLE_LINK = (By.CSS_SELECTOR, "#simpleLink")
+    BAD_REQUEST = (By.CSS_SELECTOR, "#bad-request")
