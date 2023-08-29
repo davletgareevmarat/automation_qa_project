@@ -81,3 +81,9 @@ class UploadAndDownloadPageLocators:
     UPLOADED_RESULT = (By.CSS_SELECTOR, "#uploadedFilePath")
 
     DOWNLOAD_FILE = (By.CSS_SELECTOR, "#downloadButton")
+
+
+class DynamicPropertiesPageLocators:
+    COLOR_CHANGE_BUTTON = (By.CSS_SELECTOR, "#colorChange")
+    VISIBLE_AFTER_FIVE_SEC_BUTTON = (By.CSS_SELECTOR, "#visibleAfter")
+    ENABLE_BUTTON = (By.CSS_SELECTOR, "#enableAfter")
