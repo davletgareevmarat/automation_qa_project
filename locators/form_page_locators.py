@@ -22,3 +22,5 @@ class FormPageLocators:
     # table result
 
     RESULT_TABLE = (By.XPATH, '//div[@class="table-responsive"]//td[2]')
+
+
