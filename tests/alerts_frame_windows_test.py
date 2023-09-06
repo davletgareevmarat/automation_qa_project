@@ -1,4 +1,9 @@
-from pages.alerts_frame_windows_page import BrowserWindowsPage, AlertsPage, FramesPage
+from pages.alerts_frame_windows_page import (
+    BrowserWindowsPage,
+    AlertsPage,
+    FramesPage,
+    NestedFramesPage,
+)
 
 
 class TestAlertsFrameWindow:
@@ -56,3 +61,14 @@ class TestAlertsFrameWindow:
                 "100px",
                 "100px",
             ], "The frame does not exist"
+
+    class TestNestedFramesPage:
+        def test_nested_frames(self, driver):
+            nested_frame_page = NestedFramesPage(
+                driver, "https://demoqa.com/nestedframes"
+            )
+            nested_frame_page.open()
+            parent_text, child_text = nested_frame_page.check_nested_frame()
+            print(child_text)
+            assert parent_text == "Parent frame", "Nested frame does not exist"
+            assert child_text == "Child Iframe", "Nested frame does not exist"
