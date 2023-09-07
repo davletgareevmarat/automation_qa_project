@@ -2,7 +2,7 @@ from pages.alerts_frame_windows_page import (
     BrowserWindowsPage,
     AlertsPage,
     FramesPage,
-    NestedFramesPage,
+    NestedFramesPage, ModalDialogsPage,
 )
 
 
@@ -19,6 +19,7 @@ class TestAlertsFrameWindow:
             ), "the new tab/window has not opened or an incorrect tab has opened"
 
     class TestAlertsPage:
+
         def test_see_alert(self, driver):
             alert_page = AlertsPage(driver, "https://demoqa.com/alerts")
             alert_page.open()
@@ -72,3 +73,12 @@ class TestAlertsFrameWindow:
             print(child_text)
             assert parent_text == "Parent frame", "Nested frame does not exist"
             assert child_text == "Child Iframe", "Nested frame does not exist"
+
+    class TestModalDialogsPage:
+        def test_modal_dialogs(self, driver):
+            modal_dialogs_page = ModalDialogsPage(driver, 'https://demoqa.com/modal-dialogs')
+            modal_dialogs_page.open()
+            small, large = modal_dialogs_page.check_modal_dialogs()
+            assert small[1] < large[1], 'text from large dialog is less than text from small dialog'
+            assert small[0] == 'Small Modal', 'The header is not "Small modal"'
+            assert large[0] == 'Large Modal', 'The header is not "Large modal"'
