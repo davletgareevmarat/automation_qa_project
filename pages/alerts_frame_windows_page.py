@@ -105,3 +105,4 @@ class ModalDialogsPage(BasePage):
         title_large = self.element_is_visible(self.locators.TITLE_LARGE_MODAL).text
         body_large_text = self.element_is_visible(self.locators.BODY_LARGE_MODAL).text
         return [title_small, len(body_small_text)], [title_large, len(body_large_text)]
+
