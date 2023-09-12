@@ -2,7 +2,7 @@ import random
 from faker import Faker
 
 
-from data.data import Person
+from data.data import Person, Color
 
 faker_ru = Faker("ru_Ru")
 Faker.seed()
@@ -32,4 +32,10 @@ def generated_person():
         current_address=faker_ru.address(),
         permanent_address=faker_ru.address(),
         mobile=faker_ru.msisdn(),
+    )
+
+
+def generated_color():
+    yield Color(
+        color_name=["Red", "Blue", "Green", "Yellow", "Purple", "Black", "White", "Voilet", "Indigo", "Magenta", "Aqua"]
     )
