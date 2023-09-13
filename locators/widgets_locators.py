@@ -25,3 +25,8 @@ class AutoCompletePageLocators:
         'div[class="auto-complete__single-value css-1uccc91-singleValue"]',
     )
     SINGLE_INPUT = (By.CSS_SELECTOR, "#autoCompleteSingleInput")
+
+
+class ProgressBarPageLocators:
+    PROGRESS_BAR_BUTTON = (By.CSS_SELECTOR, "#startStopButton")
+    PROGRESS_BAR_VALUE = (By.CSS_SELECTOR, 'div[class="progress-bar bg-info"]')

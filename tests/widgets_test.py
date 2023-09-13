@@ -1,4 +1,4 @@
-from pages.widgets_page import AccordianPage, AutoCompletePage
+from pages.widgets_page import AccordianPage, AutoCompletePage, ProgressBarPage
 
 
 class TestWidgets:
@@ -49,3 +49,10 @@ class TestWidgets:
             color = autocomplete_page.fill_input_single()
             color_result = autocomplete_page.check_color_in_single()
             assert color == color_result, "the added colors are missing in the input"
+
+    class TestProgressBarPage:
+        def test_progress_bar(self, driver):
+            progress_bar = ProgressBarPage(driver, 'https://demoqa.com/progress-bar')
+            progress_bar.open()
+            before, after = progress_bar.change_progress_bar_value()
+            assert before != after, 'the progress bar value has not been changed'

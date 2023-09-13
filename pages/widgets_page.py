@@ -1,10 +1,11 @@
 import random
+import time
 
 from selenium.common import TimeoutException
 from selenium.webdriver import Keys
 
 from data.generator.generator import generated_color
-from locators.widgets_locators import AccordianPageLocators, AutoCompletePageLocators
+from locators.widgets_locators import AccordianPageLocators, AutoCompletePageLocators, ProgressBarPageLocators
 from pages.base_page import BasePage
 
 
@@ -45,9 +46,7 @@ class AutoCompletePage(BasePage):
     locators = AutoCompletePageLocators()
 
     def fill_input_multi(self):
-        colors = random.sample(
-            next(generated_color()).color_name, k=random.randint(2, 5)
-        )
+        colors = random.sample(next(generated_color()).color_name, k=random.randint(2, 5))
         for color in colors:
             input_multi = self.element_is_clickable(self.locators.MULTI_INPUT)
             input_multi.send_keys(color)
@@ -80,3 +79,16 @@ class AutoCompletePage(BasePage):
     def check_color_in_single(self):
         color = self.element_is_visible(self.locators.SINGLE_VALUE)
         return color.text
+
+
+class ProgressBarPage(BasePage):
+    locators = ProgressBarPageLocators()
+
+    def change_progress_bar_value(self):
+        value_before = self.element_is_present(self.locators.PROGRESS_BAR_VALUE).text
+        progress_bar_button = self.element_is_clickable(self.locators.PROGRESS_BAR_BUTTON)
+        progress_bar_button.click()
+        time.sleep(random.randint(4, 6))
+        progress_bar_button.click()
+        value_after = self.element_is_present(self.locators.PROGRESS_BAR_VALUE).text
+        return value_before, value_after
