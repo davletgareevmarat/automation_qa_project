@@ -6,8 +6,13 @@ from selenium.webdriver import Keys
 from selenium.webdriver.support.select import Select
 
 from data.generator.generator import generated_color, generated_date
-from locators.widgets_locators import AccordianPageLocators, AutoCompletePageLocators, ProgressBarPageLocators, \
-    DatePickerPageLocators
+from locators.widgets_locators import (
+    AccordianPageLocators,
+    AutoCompletePageLocators,
+    ProgressBarPageLocators,
+    DatePickerPageLocators,
+    SliderPageLocators,
+)
 from pages.base_page import BasePage
 
 
@@ -48,7 +53,9 @@ class AutoCompletePage(BasePage):
     locators = AutoCompletePageLocators()
 
     def fill_input_multi(self):
-        colors = random.sample(next(generated_color()).color_name, k=random.randint(2, 5))
+        colors = random.sample(
+            next(generated_color()).color_name, k=random.randint(2, 5)
+        )
         for color in colors:
             input_multi = self.element_is_clickable(self.locators.MULTI_INPUT)
             input_multi.send_keys(color)
@@ -89,27 +96,27 @@ class DatePickerPage(BasePage):
     def select_date(self):
         date = next(generated_date())
         input_date = self.element_is_visible(self.locators.DATE_INPUT)
-        value_date_before = input_date.get_attribute('value')
+        value_date_before = input_date.get_attribute("value")
         input_date.click()
         self.set_date_by_text(self.locators.DATE_SELECT_MONTH, date.month)
         self.set_date_by_text(self.locators.DATE_SELECT_YEAR, date.year)
         self.set_date_item_from_list(self.locators.DATE_SELECT_DAY_LIST, date.day)
-        value_date_after = input_date.get_attribute('value')
+        value_date_after = input_date.get_attribute("value")
         return value_date_before, value_date_after
 
     def select_date_and_time(self):
         date = next(generated_date())
         input_date = self.element_is_visible(self.locators.DATE_AND_TIME_INPUT)
-        value_date_before = input_date.get_attribute('value')
+        value_date_before = input_date.get_attribute("value")
         input_date.click()
         self.element_is_clickable(self.locators.DATE_AND_TIME_MONTH).click()
         self.set_date_item_from_list(self.locators.DATE_AND_TIME_MONTH_LIST, date.month)
         self.element_is_clickable(self.locators.DATE_AND_TIME_YEAR).click()
-        self.set_date_item_from_list(self.locators.DATE_AND_TIME_YEAR_LIST, '2020')
+        self.set_date_item_from_list(self.locators.DATE_AND_TIME_YEAR_LIST, "2020")
         self.set_date_item_from_list(self.locators.DATE_SELECT_DAY_LIST, date.day)
         self.set_date_item_from_list(self.locators.DATE_AND_TIME_TIME_LIST, date.time)
         input_date_after = self.element_is_visible(self.locators.DATE_AND_TIME_INPUT)
-        value_date_after = input_date_after.get_attribute('value')
+        value_date_after = input_date_after.get_attribute("value")
         return value_date_before, value_date_after
 
     def set_date_by_text(self, element, value):
@@ -124,12 +131,29 @@ class DatePickerPage(BasePage):
                 break
 
 
+class SliderPage(BasePage):
+    locators = SliderPageLocators()
+
+    def change_slider_value(self):
+        value_before = self.element_is_visible(
+            self.locators.SLIDER_VALUE
+        ).get_attribute("value")
+        slider_input = self.element_is_visible(self.locators.INPUT_SLIDER)
+        self.action_drag_and_drop_by_offset(slider_input, random.randint(1, 100), 0)
+        value_after = self.element_is_visible(self.locators.SLIDER_VALUE).get_attribute(
+            "value"
+        )
+        return value_before, value_after
+
+
 class ProgressBarPage(BasePage):
     locators = ProgressBarPageLocators()
 
     def change_progress_bar_value(self):
         value_before = self.element_is_present(self.locators.PROGRESS_BAR_VALUE).text
-        progress_bar_button = self.element_is_clickable(self.locators.PROGRESS_BAR_BUTTON)
+        progress_bar_button = self.element_is_clickable(
+            self.locators.PROGRESS_BAR_BUTTON
+        )
         progress_bar_button.click()
         time.sleep(random.randint(4, 6))
         progress_bar_button.click()

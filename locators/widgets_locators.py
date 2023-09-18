@@ -27,11 +27,6 @@ class AutoCompletePageLocators:
     SINGLE_INPUT = (By.CSS_SELECTOR, "#autoCompleteSingleInput")
 
 
-class ProgressBarPageLocators:
-    PROGRESS_BAR_BUTTON = (By.CSS_SELECTOR, "#startStopButton")
-    PROGRESS_BAR_VALUE = (By.CSS_SELECTOR, 'div[class="progress-bar bg-info"]')
-
-
 class DatePickerPageLocators:
     DATE_INPUT = (By.CSS_SELECTOR, "#datePickerMonthYearInput")
     DATE_SELECT_MONTH = (
@@ -68,3 +63,16 @@ class DatePickerPageLocators:
         By.CSS_SELECTOR,
         'div[class="react-datepicker__year-option"]',
     )
+
+
+class SliderPageLocators:
+    INPUT_SLIDER = (
+        By.CSS_SELECTOR,
+        'input[class="range-slider range-slider--primary"]',
+    )
+    SLIDER_VALUE = (By.CSS_SELECTOR, "#sliderValue")
+
+
+class ProgressBarPageLocators:
+    PROGRESS_BAR_BUTTON = (By.CSS_SELECTOR, "#startStopButton")
+    PROGRESS_BAR_VALUE = (By.CSS_SELECTOR, 'div[class="progress-bar bg-info"]')
