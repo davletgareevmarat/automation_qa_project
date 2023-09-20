@@ -4,7 +4,7 @@ from pages.widgets_page import (
     ProgressBarPage,
     DatePickerPage,
     SliderPage,
-    TabsPage,
+    TabsPage, ToolTipsPage,
 )
 
 
@@ -112,3 +112,13 @@ class TestWidgets:
             assert (
                 more_button == "More" and what_content != 0
             ), 'the tab "more" was not pressed or the text is missing'
+
+    class TestToolTips:
+        def test_tool_tips(self, driver):
+            tool_tips_page = ToolTipsPage(driver, 'https://demoqa.com/tool-tips')
+            tool_tips_page.open()
+            button_text, field_text, contrary_text, section_text = tool_tips_page.check_tool_tips()
+            assert button_text == 'You hovered over the Button', 'hover missing or incorrect content'
+            assert field_text == 'You hovered over the text field', 'hover missing or incorrect content'
+            assert contrary_text == 'You hovered over the Contrary', 'hover missing or incorrect content'
+            assert section_text == 'You hovered over the 1.10.32', 'hover missing or incorrect content'
