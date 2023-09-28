@@ -66,5 +66,11 @@ class BasePage:
         action.move_to_element(element)
         action.perform()
 
+
+    def action_drag_and_drop_to_element(self, what, where):
+        action = ActionChains(self.driver)
+        action.drag_and_drop(what, where)
+        action.perform()
+
     def switch_to_window(self, window):
         self.driver.switch_to.window(self.driver.window_handles[window])

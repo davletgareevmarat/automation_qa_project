@@ -132,6 +132,4 @@ class TestWidgets:
                             'Sub Sub Item 2', 'Main Item 3'], "menu items do not exist or have not been selected"
 
 
-d = TestWidgets.TestMenuPage()
 
-d.test_menu_items(driver)
