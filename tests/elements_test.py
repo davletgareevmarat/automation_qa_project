@@ -117,7 +117,7 @@ class TestElements:
             button_page = ButtonsPage(driver, "https://demoqa.com/buttons")
             button_page.open()
             button_page.double_click_on_button()
-            double_click_text = button_page.click_on_different_button("double")
+            double_click_text = button_page.double_click_on_button()
             assert (
                 double_click_text == "You have done a double click"
             ), "The double click button was not pressed"
@@ -126,7 +126,7 @@ class TestElements:
             button_page = ButtonsPage(driver, "https://demoqa.com/buttons")
             button_page.open()
             button_page.right_click_on_button()
-            right_click_text = button_page.click_on_different_button("right")
+            right_click_text = button_page.right_click_on_button()
             assert (
                 right_click_text == "You have done a right click"
             ), "The right click button was not pressed"
