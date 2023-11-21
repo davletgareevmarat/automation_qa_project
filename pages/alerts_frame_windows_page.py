@@ -1,6 +1,7 @@
 import random
 import time
 
+import allure
 from selenium.common import UnexpectedAlertPresentException
 
 from locators.alerts_frame_windows_locators import (
@@ -15,7 +16,7 @@ from pages.base_page import BasePage
 
 class BrowserWindowsPage(BasePage):
     locators = BrowserWindowsPageLocators()
-
+    @allure.step('check opened new tab or window ')
     def check_opened(self, open_value):
         value = {
             "tab": self.locators.NEW_TAB_BUTTON,
@@ -31,11 +32,13 @@ class BrowserWindowsPage(BasePage):
 class AlertsPage(BasePage):
     locators = AlertsPageLocators()
 
+    @allure.step('get text from alert')
     def check_see_alert(self):
         self.element_is_visible(self.locators.SEE_ALERT_BUTTON).click()
         alert_window = self.driver.switch_to.alert
         return alert_window.text
 
+    @allure.step('check alert appear after 5 sec')
     def check_alert_appear_5_sec(self):
         self.element_is_visible(self.locators.APPEAR_ALERT_AFTER_5_SEC_BUTTON).click()
         time.sleep(6)
@@ -46,6 +49,7 @@ class AlertsPage(BasePage):
             alert_window = self.driver.switch_to.alert
             return alert_window.text
 
+    @allure.step('check confirm alert')
     def check_confirm_alert(self):
         self.element_is_visible(self.locators.CONFIRM_BOX_ALERT_BUTTON).click()
         alert_window = self.driver.switch_to.alert
@@ -53,6 +57,7 @@ class AlertsPage(BasePage):
         text_result = self.element_is_present(self.locators.CONFIRM_RESULT).text
         return text_result
 
+    @allure.step('check prompt alert')
     def check_prompt_alert(self):
         text = f"autotest{random.randint(0, 999)}"
         self.element_is_visible(self.locators.PROMPT_BOX_ALERT_BUTTON).click()
@@ -66,6 +71,7 @@ class AlertsPage(BasePage):
 class FramesPage(BasePage):
     locators = FramesPageLocators()
 
+    @allure.step('check frame')
     def check_frame(self, frame_num):
         frame_value = {
             "frame1": self.locators.FIRST_FRAME,
@@ -83,6 +89,7 @@ class FramesPage(BasePage):
 class NestedFramesPage(BasePage):
     locators = NestedFramesPageLocators()
 
+    @allure.step('check nested frame')
     def check_nested_frame(self):
         parent_frame = self.element_is_present(self.locators.PARENT_FRAME)
         self.driver.switch_to.frame(parent_frame)
@@ -96,6 +103,7 @@ class NestedFramesPage(BasePage):
 class ModalDialogsPage(BasePage):
     locators = ModalDialogsPageLocators()
 
+    @allure.step('check modal dialogs')
     def check_modal_dialogs(self):
         self.element_is_visible(self.locators.SMALL_MODAL_BUTTON).click()
         title_small = self.element_is_visible(self.locators.TITLE_SMALL_MODAL).text
